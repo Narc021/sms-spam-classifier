@@ -5,6 +5,26 @@ from nltk.corpus import stopwords
 import nltk
 from nltk.stem.porter import PorterStemmer
 
+# Download required NLTK data
+@st.cache_resource
+def download_nltk_data():
+    """Download required NLTK data files"""
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')
+    try:
+        nltk.data.find('corpora/stopwords')
+    except LookupError:
+        nltk.download('stopwords')
+    try:
+        nltk.data.find('tokenizers/punkt_tab')
+    except LookupError:
+        nltk.download('punkt_tab')
+
+# Download NLTK data at startup
+download_nltk_data()
+
 # Page configuration
 st.set_page_config(
     page_title="Spam Detector",
